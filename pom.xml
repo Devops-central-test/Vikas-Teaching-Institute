@@ -13,11 +13,12 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
     <dependencies>
 
-        <!-- Javax Servlet API (Tomcat 9) -->
+        <!-- Javax Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -40,7 +41,7 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- JavaMail API -->
+        <!-- JavaMail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
@@ -59,7 +60,7 @@
     <build>
         <finalName>admin-devops-app</finalName>
 
-        <!-- Include ALL webapp resources -->
+        <!-- Copy ALL static files from src/main/webapp -->
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>
@@ -71,17 +72,18 @@
 
         <plugins>
 
-            <!-- WAR Plugin: package all webapp files (frontend + others) -->
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
                 <configuration>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
 
-            <!-- Java Compiler Plugin -->
+            <!-- Java Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
