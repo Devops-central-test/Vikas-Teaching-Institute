@@ -17,7 +17,7 @@
 
     <dependencies>
 
-        <!-- Servlet API (Tomcat provides this) -->
+        <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -40,18 +40,18 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- JavaMail (javax.mail) for backwards compatibility on JDK 17 -->
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.6.2</version>
-        </dependency>
-
-        <!-- MySQL Connector -->
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.1.0</version>
+        </dependency>
+
+        <!-- Java Mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
         </dependency>
 
     </dependencies>
@@ -61,16 +61,17 @@
 
         <plugins>
 
-            <!-- WAR Plugin: include JSP + CSS + JS + frontend folder -->
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
                 <configuration>
-                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
 
+                    <!-- IMPORTANT: Copy frontend folder correctly -->
                     <webResources>
+
+                        <!-- copy frontend JSP folder -->
                         <resource>
                             <directory>src/main/webapp/frontend</directory>
                             <targetPath>frontend</targetPath>
@@ -78,23 +79,31 @@
                                 <include>**/*</include>
                             </includes>
                         </resource>
+
+                        <!-- copy static files properly -->
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>css/**</include>
+                                <include>js/**</include>
+                                <include>images/**</include>
+                                <include>fonts/**</include>
+                            </includes>
+                        </resource>
                     </webResources>
+
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
 
-            <!-- Java 17 Compiler with legacy module support -->
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.10.1</version>
                 <configuration>
                     <source>17</source>
                     <target>17</target>
-                    <fork>true</fork>
-                    <compilerArgs>
-                        <arg>--add-opens</arg>
-                        <arg>java.base/java.lang=ALL-UNNAMED</arg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
 
