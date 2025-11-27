@@ -59,13 +59,39 @@
     <build>
         <finalName>admin-devops-app</finalName>
 
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <includes>
+                    <include>**/*.jsp</include>
+                    <include>**/*.html</include>
+                    <include>**/*.css</include>
+                    <include>**/*.js</include>
+                    <include>**/*.png</include>
+                    <include>**/*.jpg</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
 
-            <!-- WAR Plugin -->
+            <!-- WAR Plugin: include frontend folder -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp/frontend</directory>
+                            <targetPath>frontend</targetPath>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
 
             <!-- Java Compiler Plugin -->
