@@ -2,19 +2,6 @@
 <%@page import="db.connect_db"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/bootstrap.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/animate.css'/>">
-</head>
-
-<body>
-
 <%
     String email = (String) session.getAttribute("email");
     String name  = (String) session.getAttribute("user");
@@ -27,22 +14,25 @@
 
                 <!-- LOGO -->
                 <div class="col-md-3">
-                    <div class="fa fa-book" style="color:blue;">
-                        <a href="<c:url value='/frontend/index.jsp'/>">Shiva Teaching</a>
-                    </div>
+                    <h3 style="color:white; margin:0;">
+                        <i class="fa fa-book" style="color:blue;"></i>
+                        <a href="<c:url value='/frontend/index.jsp'/>" style="color:white; text-decoration:none;">
+                            Shiva Teaching
+                        </a>
+                    </h3>
                 </div>
 
                 <!-- MENU -->
                 <div class="col-md-9 text-right menu-1" style="margin-top:-43px">
-
                     <ul>
 
                         <li><a href="<c:url value='/frontend/index.jsp'/>">Home</a></li>
 
-                        <% 
-                           Connection con = new connect_db().getConnection();
-                           PreparedStatement ps = con.prepareStatement("SELECT * FROM add_category");
-                           ResultSet rs = ps.executeQuery();
+                        <!-- CATEGORY DROPDOWN -->
+                        <%
+                            Connection con = new connect_db().getConnection();
+                            PreparedStatement ps = con.prepareStatement("SELECT * FROM add_category");
+                            ResultSet rs = ps.executeQuery();
                         %>
 
                         <li class="has-dropdown">
@@ -67,31 +57,25 @@
 
                         <% if(email == null) { %>
 
-                        <li><a href="<c:url value='/frontend/signin.jsp'/>">Sign In</a></li>
-                        <li><a href="<c:url value='/frontend/signup.jsp'/>">Sign Up</a></li>
+                            <li><a href="<c:url value='/frontend/signin.jsp'/>">Sign In</a></li>
+                            <li><a href="<c:url value='/frontend/signup.jsp'/>">Sign Up</a></li>
 
                         <% } else { %>
 
-                        <li class="has-dropdown">
-                            <span class="fa fa-user"></span>
-                            <a href="#"><b><%= name %></b></a>
-
-                            <ul class="dropdown">
-                                <li><a href="<c:url value='/frontend/profile_user.jsp'/>">PROFILE</a></li>
-                                <li><a href="<c:url value='/frontend/logout.jsp'/>">LOGOUT</a></li>
-                            </ul>
-                        </li>
+                            <li class="has-dropdown">
+                                <a href="#"><span class="fa fa-user"></span> <b><%= name %></b></a>
+                                <ul class="dropdown">
+                                    <li><a href="<c:url value='/frontend/profile_user.jsp'/>">PROFILE</a></li>
+                                    <li><a href="<c:url value='/frontend/logout.jsp'/>">LOGOUT</a></li>
+                                </ul>
+                            </li>
 
                         <% } %>
 
                     </ul>
-
                 </div>
 
             </div>
         </div>
     </div>
 </nav>
-
-</body>
-</html>
