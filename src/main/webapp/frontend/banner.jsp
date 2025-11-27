@@ -2,7 +2,7 @@
 <%@page import="db.connect_db"%>
 
 <%
-    String ctx = request.getContextPath();
+    String bannerCtx = request.getContextPath();
 %>
 
 <!-- JSSOR Slider JS -->
