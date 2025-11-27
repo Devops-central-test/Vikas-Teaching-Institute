@@ -18,8 +18,14 @@ public class connect_db {
     {
         try
         {
-            Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/admin","root","root");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // CHANGE THIS: use your EC2 PRIVATE IP
+            String url = "jdbc:mysql://172.31.25.139:3306/admin?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+            String user = "adminapp_user";
+            String pass = "StrongP@ssw0rd";
+
+            con = DriverManager.getConnection(url, user, pass);
         }
         catch(Exception e)
         {
@@ -28,3 +34,4 @@ public class connect_db {
     }
     
 }
+
