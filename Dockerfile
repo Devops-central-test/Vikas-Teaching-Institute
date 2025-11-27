@@ -1,10 +1,10 @@
-FROM tomcat:11-jdk17
+FROM tomcat:9-jdk17
 
-# Remove default Tomcat applications
+# Remove default ROOT apps
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy WAR produced from the webapp module
-COPY webapp.war /usr/local/tomcat/webapps/webapp.war
+# Copy WAR
+COPY admin-devops-app.war /usr/local/tomcat/webapps/admin-devops-app.war
 
 EXPOSE 8080
 
