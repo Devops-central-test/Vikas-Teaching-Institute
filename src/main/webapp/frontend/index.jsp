@@ -46,7 +46,8 @@
 <div id="page">
 
     <!-- HEADER -->
-    <jsp:include page="include/header.jsp"></jsp:include>
+  <jsp:include page="/frontend/include/header.jsp"></jsp:include>
+
 
     <!-- HERO / BANNER -->
     <aside id="colorlib-hero" style="padding-top:133px">
@@ -219,7 +220,8 @@
 <%@ include file="top_courses.jsp" %>
 
 <!-- FOOTER -->
-<jsp:include page="include/footer.jsp"></jsp:include>
+<jsp:include page="/frontend/include/footer.jsp"></jsp:include>
+
 
 </div> <!-- END PAGE -->
 
