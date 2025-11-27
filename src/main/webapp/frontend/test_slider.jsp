@@ -2,7 +2,7 @@
 <%@page import="db.connect_db"%>
 
 <%
-    String ctx = request.getContextPath();
+    String ctx = request.getContextPath();    // SINGLE context variable
 %>
 
 <!DOCTYPE html>
@@ -35,11 +35,10 @@
 
 <%
     Connection conT = new connect_db().getConnection();
-    PreparedStatement pst = conT.prepareStatement(
-        "SELECT testmonial.content, testmonial.title, user_register.image " +
-        "FROM testmonial INNER JOIN user_register ON testmonial.email=user_register.email " +
-        "WHERE status='active'"
-    );
+    String sql = "SELECT t.content, t.title, u.image " +
+                 "FROM testmonial t INNER JOIN user_register u " +
+                 "ON t.email = u.email WHERE t.status = 'active'";
+    PreparedStatement pst = conT.prepareStatement(sql);
     ResultSet rst = pst.executeQuery();
 %>
 
@@ -50,11 +49,13 @@
 
         <div class="testimonial-item">
 
+            <!-- Client Info -->
             <div class="testimonial-client">
                 <img src="<%= ctx %>/admin/images/<%= rst.getString("image") %>" alt="">
                 <p class="client-name"><%= rst.getString("title") %></p>
             </div>
 
+            <!-- Testimonial Text -->
             <div class="testimonial-text">
                 <p><%= rst.getString("content") %></p>
             </div>
