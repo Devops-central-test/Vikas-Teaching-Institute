@@ -38,6 +38,28 @@
             width: 100%;
             box-sizing: border-box;
         }
+
+        .login-form {
+            width: 35%;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px #ccc;
+        }
+
+        input[type=submit] {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        input[type=submit]:hover {
+            background: #0056b3;
+        }
     </style>
 
 </head>
@@ -48,58 +70,51 @@
 
 <div id="page">
 
-    <!-- HEADER (very important: ../include/) -->
+    <!-- HEADER (important: ../include/) -->
     <jsp:include page="../include/header.jsp"></jsp:include>
 
-    <div class="about">
-        <center>
-            <div class="container" style="margin-top:180px">
-                <div class="col-md-12 colorlib-heading center-heading text-center animate-box">
-                    <h1 class="heading-big">Sign In</h1>
-                    <h2>Sign In</h2>
-                </div>
+    <div style="margin-top:160px"></div>
 
-                <div class="login-form">
-
-                    <!-- SIGNIN FORM -->
-                    <form action="<%= ctx %>/userlogin" method="post">
-
-                        <div>
-                            <label>Email</label>
-                            <input type="text" name="email" required
-                                   placeholder="Enter Email"
-                                   pattern="(?!(^[.-].*|[^@]*[.-]@|.*\.{2,}.*)|^.{254}.)([a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@)(?!-.*|.*-\.)([a-zA-Z-]{1,63}\.)+[a-zA-Z]{2,15}">
-                        </div>
-
-                        <br>
-
-                        <div>
-                            <label>Password</label>
-                            <input type="password" name="password" required>
-                        </div>
-
-                        <br>
-
-                        <div>
-                            <ul>
-                                <input type="checkbox"> Remember me?
-                                <br>
-                                <a href="<%= ctx %>/frontend/forgot_password.jsp">Forgot password?</a>
-                            </ul>
-                        </div>
-
-                        <input type="submit" value="Sign In">
-                    </form>
-
-                    <p>
-                        Don’t have an account?
-                        <a href="<%= ctx %>/frontend/signup.jsp">Sign Up</a>
-                    </p>
-
-                </div>
+    <center>
+        <div class="container">
+            <div class="col-md-12 colorlib-heading center-heading text-center animate-box">
+                <h1 class="heading-big">Sign In</h1>
+                <h2>Sign In</h2>
             </div>
-        </center>
-    </div>
+
+            <div class="login-form">
+
+                <!-- SIGNIN FORM -->
+                <form action="<%= ctx %>/userlogin" method="post">
+
+                    <label>Email</label>
+                    <input type="text" name="email" required placeholder="Enter Email">
+
+                    <br>
+
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+
+                    <br>
+
+                    <div style="margin-bottom:10px;">
+                        <input type="checkbox"> Remember me?
+                        <br>
+                        <a href="<%= ctx %>/frontend/forgot_password.jsp">Forgot password?</a>
+                    </div>
+
+                    <input type="submit" value="Sign In">
+
+                </form>
+
+                <p style="margin-top:10px;">
+                    Don’t have an account?
+                    <a href="<%= ctx %>/frontend/signup.jsp">Sign Up</a>
+                </p>
+
+            </div>
+        </div>
+    </center>
 
     <!-- FOOTER -->
     <jsp:include page="../include/footer.jsp"></jsp:include>
@@ -113,7 +128,7 @@
 <script src="<%= ctx %>/js/jquery.waypoints.min.js"></script>
 <script src="<%= ctx %>/js/jquery.stellar.min.js"></script>
 <script src="<%= ctx %>/js/jquery.flexslider-min.js"></script>
-<script src="<%= ctx %>/js/owl.carousel.min.js"></script>
+script src="<%= ctx %>/js/owl.carousel.min.js"></script>
 <script src="<%= ctx %>/js/jquery.magnific-popup.min.js"></script>
 <script src="<%= ctx %>/js/magnific-popup-options.js"></script>
 <script src="<%= ctx %>/js/jquery.countTo.js"></script>
