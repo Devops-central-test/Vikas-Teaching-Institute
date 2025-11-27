@@ -17,7 +17,7 @@
 
     <dependencies>
 
-        <!-- Jakarta Servlet API -->
+        <!-- Jakarta Servlet API (Tomcat 10.1+ / Servlet 6) -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -33,11 +33,18 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSTL Runtime (Correct Artifact for Jakarta EE) -->
+        <!-- JSTL API (required) -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- JSTL Runtime Implementation -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
 
         <!-- MySQL JDBC Driver -->
