@@ -23,7 +23,7 @@
                     </h3>
                 </div>
 
-                <!-- MENU -->
+                <!-- NAV MENU -->
                 <div class="col-md-9 text-right menu-1" style="margin-top:-43px">
                     <ul>
 
@@ -31,18 +31,18 @@
 
                         <!-- CATEGORY DROPDOWN -->
                         <%
-                            Connection con = new connect_db().getConnection();
-                            PreparedStatement ps = con.prepareStatement("SELECT * FROM add_category");
-                            ResultSet rs = ps.executeQuery();
+                            Connection conMenu = new connect_db().getConnection();
+                            PreparedStatement psMenu = conMenu.prepareStatement("SELECT * FROM add_category");
+                            ResultSet rsMenu = psMenu.executeQuery();
                         %>
 
                         <li class="has-dropdown">
                             <a href="<%= ctx %>/frontend/courses.jsp">Courses</a>
                             <ul class="dropdown">
-                                <% while(rs.next()) { %>
+                                <% while(rsMenu.next()) { %>
                                 <li>
-                                    <a href="<%= ctx %>/frontend/course_category.jsp?id=<%= rs.getString("id") %>">
-                                        <%= rs.getString("category") %>
+                                    <a href="<%= ctx %>/frontend/course_category.jsp?id=<%= rsMenu.getString("id") %>">
+                                        <%= rsMenu.getString("category") %>
                                     </a>
                                 </li>
                                 <% } %>
@@ -64,9 +64,7 @@
                         <% } else { %>
 
                             <li class="has-dropdown">
-                                <a href="#">
-                                    <span class="fa fa-user"></span> <b><%= name %></b>
-                                </a>
+                                <a href="#"><span class="fa fa-user"></span> <b><%= name %></b></a>
                                 <ul class="dropdown">
                                     <li><a href="<%= ctx %>/frontend/profile_user.jsp">PROFILE</a></li>
                                     <li><a href="<%= ctx %>/frontend/logout.jsp">LOGOUT</a></li>
