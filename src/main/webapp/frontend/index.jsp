@@ -1,8 +1,11 @@
-<%@page import="db.connect_db"%>
 <%@page import="java.sql.*"%>
+<%@page import="db.connect_db"%>
 
 <%
     String ctx = request.getContextPath();
+    Connection con1 = null;
+    PreparedStatement ps1 = null, ps3 = null, ps4 = null;
+    ResultSet rs1 = null, rs3 = null, rs4 = null;
 %>
 
 <!DOCTYPE html>
@@ -10,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Knowledge Template</title>
+    <title>Shiva Teaching Institute</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS FILES -->
@@ -27,7 +30,7 @@
     <script src="<%= ctx %>/js/modernizr-2.6.2.min.js"></script>
 
     <style>
-        h3.a { white-space: nowrap; overflow: hidden; word-break: break-all; }
+        h3.a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     </style>
 </head>
 
@@ -40,18 +43,19 @@
     <jsp:include page="/frontend/include/header.jsp" />
 
     <!-- BANNER -->
-    <aside id="colorlib-hero" style="padding-top:133px">
-         <jsp:include page="banner.jsp" />
+    <aside id="colorlib-hero" style="padding-top:133px;">
+        <jsp:include page="/frontend/banner.jsp" />
     </aside>
 
 <%
-    Connection con1 = new connect_db().getConnection();
+    try {
+        con1 = new connect_db().getConnection();
 %>
 
 <!-- EVENTS -->
 <%
-    PreparedStatement ps1 = con1.prepareStatement("SELECT * FROM events ORDER BY id DESC LIMIT 3");
-    ResultSet rs1 = ps1.executeQuery();
+        ps1 = con1.prepareStatement("SELECT * FROM events ORDER BY id DESC LIMIT 3");
+        rs1 = ps1.executeQuery();
 %>
 
 <div class="colorlib-classes">
@@ -69,7 +73,7 @@
                 <div class="classes">
 
                     <div class="classes-img"
-                        style="background-image:url('<%= ctx %>/admin/images/<%= rs1.getString("image") %>'); width:341px;">
+                         style="background-image:url('<%= ctx %>/admin/images/<%= rs1.getString("image") %>'); width:341px;">
                     </div>
 
                     <div class="wrap">
@@ -92,14 +96,14 @@
     </div>
 </div>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS SECTION -->
 <div class="col-md-12 colorlib-heading text-center animate-box">
     <h1 class="heading-big">Testimonials</h1>
     <h2>Testimonials</h2>
 </div>
 
-<!-- TEST SLIDER (dynamic include) -->
-<jsp:include page="test_slider.jsp" />
+<!-- INCLUDE TEST SLIDER -->
+<jsp:include page="/frontend/test_slider.jsp" />
 
 <center>
     <button class="btn btn-default">
@@ -111,8 +115,8 @@
 
 <!-- MENTORS -->
 <%
-    PreparedStatement ps3 = con1.prepareStatement("SELECT * FROM add_team ORDER BY id DESC LIMIT 4");
-    ResultSet rs3 = ps3.executeQuery();
+        ps3 = con1.prepareStatement("SELECT * FROM add_team ORDER BY id DESC LIMIT 4");
+        rs3 = ps3.executeQuery();
 %>
 
 <div class="colorlib-trainers">
@@ -129,8 +133,7 @@
             <div class="col-md-3 col-sm-3 animate-box">
                 <div class="trainers-entry">
                     <div class="trainer-img"
-                        style="background-image:url('<%= ctx %>/admin/images/<%= rs3.getString("image") %>');"></div>
-
+                         style="background-image:url('<%= ctx %>/admin/images/<%= rs3.getString("image") %>');"></div>
                     <div class="desc" style="background-color: lightblue;">
                         <center>
                             <h3><%= rs3.getString("name") %></h3>
@@ -146,8 +149,8 @@
 
 <!-- SERVICES -->
 <%
-    PreparedStatement ps4 = con1.prepareStatement("SELECT * FROM services ORDER BY id DESC LIMIT 6");
-    ResultSet rs4 = ps4.executeQuery();
+        ps4 = con1.prepareStatement("SELECT * FROM services ORDER BY id DESC LIMIT 6");
+        rs4 = ps4.executeQuery();
 %>
 
 <div class="colorlib-classes">
@@ -165,7 +168,7 @@
                 <div class="classes">
 
                     <div class="classes-img"
-                        style="background-image:url('<%= ctx %>/admin/images/<%= rs4.getString("image") %>'); width:341px;">
+                         style="background-image:url('<%= ctx %>/admin/images/<%= rs4.getString("image") %>'); width:341px;">
                     </div>
 
                     <div class="wrap">
@@ -188,11 +191,23 @@
     </div>
 </div>
 
-<!-- TOP COURSES (dynamic include) -->
-<jsp:include page="top_courses.jsp" />
+<!-- TOP COURSES -->
+<jsp:include page="/frontend/top_courses.jsp" />
 
 <!-- FOOTER -->
 <jsp:include page="/frontend/include/footer.jsp" />
+
+<%
+    } finally {
+        if (rs1 != null) rs1.close();
+        if (ps1 != null) ps1.close();
+        if (rs3 != null) rs3.close();
+        if (ps3 != null) ps3.close();
+        if (rs4 != null) rs4.close();
+        if (ps4 != null) ps4.close();
+        if (con1 != null) con1.close();
+    }
+%>
 
 </div> <!-- END page -->
 
