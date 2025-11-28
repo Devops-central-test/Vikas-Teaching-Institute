@@ -39,8 +39,8 @@
 
         <% while (rs.next()) { %>
             <div>
-                <img data-u="image"
-                     src="<%= request.getContextPath() %>/admin/images/<%= rs.getString("title") %>">
+               <img data-u="image" src="<%= ctx %>/images/<%= rs.getString("title") %>" />
+
             </div>
         <% } %>
 
