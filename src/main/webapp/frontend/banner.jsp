@@ -15,17 +15,23 @@
     }
 </style>
 
-<div id="jssor_1" style="position:relative;margin:auto;width:1300px;height:500px;overflow:hidden;visibility:hidden;">
+<div id="jssor_1"
+     style="position:relative;margin:auto;width:1300px;height:500px;overflow:hidden;">
 
+    <!-- LOADING -->
     <div data-u="loading" class="jssorl-009-spin"
          style="position:absolute;top:0;left:0;width:100%;height:100%;
                 text-align:center;background-color:rgba(0,0,0,0.7);">
 
-        <img src="<%= request.getContextPath() %>/img/spin.svg"
+        <!-- FIX: Correct image folder -->
+        <img src="<%= request.getContextPath() %>/images/loader.gif"
              style="margin-top:-19px;top:50%;position:relative;width:38px;height:38px;" />
     </div>
 
-    <div data-u="slides" style="cursor:default;position:relative;width:1300px;height:500px;overflow:hidden;">
+    <!-- SLIDES -->
+    <div data-u="slides"
+         style="cursor:default;position:relative;width:1300px;height:500px;overflow:hidden;">
+
         <%
             Connection con = new connect_db().getConnection();
             PreparedStatement ps = con.prepareStatement(
@@ -35,10 +41,20 @@
         %>
 
         <% while(rs.next()) { %>
-        <div>
-            <img data-u="image" src="<%= request.getContextPath() %>/images/<%= rs.getString("title") %>" />
-        </div>
+            <div>
+                <!-- FIX: Images folder -->
+                <img data-u="image"
+                     src="<%= request.getContextPath() %>/images/<%= rs.getString("title") %>" />
+            </div>
         <% } %>
+
     </div>
 
 </div>
+
+<script>
+    window.onload = function() {
+        var options = { $AutoPlay: 1 };
+        var jssor_slider = new $JssorSlider$("jssor_1", options);
+    };
+</script>
