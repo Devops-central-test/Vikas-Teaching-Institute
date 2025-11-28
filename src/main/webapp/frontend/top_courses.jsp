@@ -34,14 +34,15 @@
             <div class="col-md-3 animate-box">
                 <div class="classes">
 
-                    <!-- FIX: Correct image folder -->
+                    <!-- IMAGE -->
                     <div class="classes-img card-img"
                          style="background-image:url('<%= request.getContextPath() %>/admin/images/<%= rs.getString("image") %>');">
                     </div>
 
                     <div class="wrap">
                         <div class="desc">
-                            <h3 class="a"><%= rs.getString("title") %></h3>
+                            <!-- FIX: Correct column for course title -->
+                            <h3 class="a"><%= rs.getString("cname") %></h3>
                         </div>
 
                         <div class="pricing" style="height:37px;">
