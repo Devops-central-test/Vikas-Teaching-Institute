@@ -13,15 +13,15 @@ import java.sql.DriverManager;
  * @author vikas upadhyay
  */
 public class connect_db {
-        Connection con=null;
+    Connection con = null;
+
     public Connection getConnection()
     {
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // CHANGE THIS: use your EC2 PRIVATE IP
-            String url = "jdbc:mysql://172.31.25.139:3306/admin?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+            String url = "jdbc:mysql://3.95.62.245:3306/admin?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
             String user = "adminapp_user";
             String pass = "StrongP@ssw0rd";
 
@@ -29,9 +29,10 @@ public class connect_db {
         }
         catch(Exception e)
         {
-            System.out.println(e);
-        }return con;
+            System.out.println("DB ERROR: " + e.getMessage());
+        }
+        return con;
     }
-    
 }
+
 
