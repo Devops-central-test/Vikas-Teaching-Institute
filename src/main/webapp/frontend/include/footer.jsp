@@ -4,10 +4,10 @@
 
 <%
     String ctx = request.getContextPath();
-    Connection con2 = new connect_db().getConnection();
+    Connection con = new connect_db().getConnection();
 
     // CONTACT INFO
-    PreparedStatement ps = con2.prepareStatement("SELECT * FROM contact_info");
+    PreparedStatement ps = con.prepareStatement("SELECT * FROM contact_info");
     ResultSet rs = ps.executeQuery();
 
     String company="", address="", telephone="", email="", fax="";
@@ -20,7 +20,7 @@
     }
 
     // SOCIAL LINKS
-    PreparedStatement ps2 = con2.prepareStatement("SELECT * FROM location_link");
+    PreparedStatement ps2 = con.prepareStatement("SELECT * FROM location_link");
     ResultSet rs2 = ps2.executeQuery();
 
     String fb="", google="", insta="", youtube="";
@@ -37,6 +37,7 @@
 
         <div class="row row-pb-md">
 
+            <!-- CONTACT BLOCK -->
             <div class="col-md-3 colorlib-widget">
                 <h4>Contact Info</h4>
 
@@ -50,6 +51,7 @@
 
             <div class="col-md-2 colorlib-widget"></div>
 
+            <!-- USEFUL LINKS -->
             <div class="col-md-2 colorlib-widget">
                 <h4>Useful Links</h4>
                 <ul>
