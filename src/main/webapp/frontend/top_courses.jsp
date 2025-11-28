@@ -1,4 +1,5 @@
 <%@page import="java.sql.*"%>
+<%@page import="db.connect_db"%>
 
 <style>
 .card-img {
@@ -10,8 +11,10 @@
 </style>
 
 <%
-    Connection con = new db.connect_db().getConnection();
-    PreparedStatement ps = con.prepareStatement("SELECT * FROM courses ORDER BY id DESC LIMIT 4");
+    Connection con = new connect_db().getConnection();
+    PreparedStatement ps = con.prepareStatement(
+        "SELECT * FROM courses ORDER BY id DESC LIMIT 4"
+    );
     ResultSet rs = ps.executeQuery();
 %>
 
@@ -25,11 +28,13 @@
         </div>
 
         <div class="row">
+
             <% while (rs.next()) { %>
 
             <div class="col-md-3 animate-box">
                 <div class="classes">
 
+                    <!-- FIX: Correct image folder -->
                     <div class="classes-img card-img"
                          style="background-image:url('<%= request.getContextPath() %>/admin/images/<%= rs.getString("image") %>');">
                     </div>
@@ -52,6 +57,7 @@
             </div>
 
             <% } %>
+
         </div>
 
     </div>
