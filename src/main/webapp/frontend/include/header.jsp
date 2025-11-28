@@ -3,11 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
+    String ctx = request.getContextPath();
     String email = (String) session.getAttribute("email");
     String name  = (String) session.getAttribute("user");
-
-    // REQUIRED for all pages
-    String ctx = request.getContextPath();
 %>
 
 <nav class="colorlib-nav" role="navigation" style="background:black;height:133px;">
@@ -19,8 +17,7 @@
                 <div class="col-md-3">
                     <h3 style="color:white; margin:0;">
                         <i class="fa fa-book" style="color:blue;"></i>
-                        <a href="<c:url value='/frontend/index.jsp'/>"
-                           style="color:white; text-decoration:none;">
+                        <a href="<%= ctx %>/frontend/index.jsp" style="color:white; text-decoration:none;">
                             Shiva Teaching
                         </a>
                     </h3>
@@ -30,7 +27,7 @@
                 <div class="col-md-9 text-right menu-1" style="margin-top:-43px">
                     <ul>
 
-                        <li><a href="<c:url value='/frontend/index.jsp'/>">Home</a></li>
+                        <li><a href="<%= ctx %>/frontend/index.jsp">Home</a></li>
 
                         <!-- CATEGORY DROPDOWN -->
                         <%
@@ -40,11 +37,11 @@
                         %>
 
                         <li class="has-dropdown">
-                            <a href="<c:url value='/frontend/courses.jsp'/>">Courses</a>
+                            <a href="<%= ctx %>/frontend/courses.jsp">Courses</a>
                             <ul class="dropdown">
                                 <% while(rs.next()) { %>
                                 <li>
-                                    <a href="<c:url value='/frontend/course_category.jsp'/>?id=<%= rs.getString("id") %>">
+                                    <a href="<%= ctx %>/frontend/course_category.jsp?id=<%= rs.getString("id") %>">
                                         <%= rs.getString("category") %>
                                     </a>
                                 </li>
@@ -52,24 +49,30 @@
                             </ul>
                         </li>
 
-                        <li><a href="<c:url value='/frontend/teachers.jsp'/>">Mentors</a></li>
-                        <li><a href="<c:url value='/frontend/about.jsp'/>">About</a></li>
-                        <li><a href="<c:url value='/frontend/event.jsp'/>">Events</a></li>
-                        <li><a href="<c:url value='/frontend/services.jsp'/>">Services</a></li>
-                        <li><a href="<c:url value='/frontend/blog.jsp'/>">Blog</a></li>
-                        <li><a href="<c:url value='/frontend/contact.jsp'/>">Contact</a></li>
+                        <li><a href="<%= ctx %>/frontend/teachers.jsp">Mentors</a></li>
+                        <li><a href="<%= ctx %>/frontend/about.jsp">About</a></li>
+                        <li><a href="<%= ctx %>/frontend/event.jsp">Events</a></li>
+                        <li><a href="<%= ctx %>/frontend/services.jsp">Services</a></li>
+                        <li><a href="<%= ctx %>/frontend/blog.jsp">Blog</a></li>
+                        <li><a href="<%= ctx %>/frontend/contact.jsp">Contact</a></li>
 
                         <% if(email == null) { %>
-                            <li><a href="<c:url value='/frontend/signin.jsp'/>">Sign In</a></li>
-                            <li><a href="<c:url value='/frontend/signup.jsp'/>">Sign Up</a></li>
+
+                            <li><a href="<%= ctx %>/frontend/signin.jsp">Sign In</a></li>
+                            <li><a href="<%= ctx %>/frontend/signup.jsp">Sign Up</a></li>
+
                         <% } else { %>
+
                             <li class="has-dropdown">
-                                <a href="#"><span class="fa fa-user"></span> <b><%= name %></b></a>
+                                <a href="#">
+                                    <span class="fa fa-user"></span> <b><%= name %></b>
+                                </a>
                                 <ul class="dropdown">
-                                    <li><a href="<c:url value='/frontend/profile_user.jsp'/>">PROFILE</a></li>
-                                    <li><a href="<c:url value='/frontend/logout.jsp'/>">LOGOUT</a></li>
+                                    <li><a href="<%= ctx %>/frontend/profile_user.jsp">PROFILE</a></li>
+                                    <li><a href="<%= ctx %>/frontend/logout.jsp">LOGOUT</a></li>
                                 </ul>
                             </li>
+
                         <% } %>
 
                     </ul>
