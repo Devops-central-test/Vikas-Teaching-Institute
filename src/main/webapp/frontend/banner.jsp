@@ -1,5 +1,6 @@
 <%@page import="java.sql.*"%>
 <%@page import="db.connect_db"%>
+<%@ page isErrorPage="true" %>
 
 <!-- Slider JS -->
 <script src="<%= request.getContextPath() %>/js/jquery-1.11.3.min.js"></script>
