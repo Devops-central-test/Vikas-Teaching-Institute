@@ -1,18 +1,14 @@
 <%@page import="java.sql.*"%>
 <%@page import="db.connect_db"%>
 
-<%
-    String ctx = request.getContextPath();
-%>
-
-<link rel="stylesheet" href="<%= ctx %>/sss/sss.css">
-<link rel="stylesheet" href="<%= ctx %>/sss/estilos.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/sss/sss.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/sss/estilos.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="<%= ctx %>/sss/sss.js"></script>
+<script src="<%= request.getContextPath() %>/sss/sss.js"></script>
 
 <script>
-    $(function(){
+    jQuery(function($){
         $('.slider-testimonial').sss({
             slideShow : true,
             speed : 3500
@@ -22,6 +18,7 @@
 
 <%
     Connection conT = new connect_db().getConnection();
+
     String sql = "SELECT t.content, t.title, u.image " +
                  "FROM testmonial t INNER JOIN user_register u " +
                  "ON t.email = u.email WHERE t.status = 'active'";
@@ -37,7 +34,7 @@
 
         <div class="testimonial-item">
             <div class="testimonial-client">
-                <img src="<%= ctx %>/images/<%= rst.getString("image") %>" alt="">
+                <img src="<%= request.getContextPath() %>/admin/images/<%= rst.getString("image") %>" alt="">
                 <p class="client-name"><%= rst.getString("title") %></p>
             </div>
             <div class="testimonial-text">
