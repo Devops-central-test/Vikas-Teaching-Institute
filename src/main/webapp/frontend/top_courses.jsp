@@ -1,10 +1,6 @@
 <%@page import="db.connect_db"%>
 <%@page import="java.sql.*"%>
 
-<%
-    String ctx = request.getContextPath();   // ADD THIS
-%>
-
 <style>
     h3.a {
         white-space: nowrap;
@@ -48,15 +44,14 @@
                 <div class="classes">
 
                     <div class="classes-img"
-                         style="background-image:url('<%= ctx %>/admin/images/<%= rs42.getString("image") %>'); width:341px;">
+                        style="background-image:url('<%= request.getContextPath() %>/admin/images/<%= rs42.getString("image") %>');
+                               width:341px;">
                     </div>
 
                     <div class="wrap">
                         <div class="desc">
                             <span class="teacher"><%= rs42.getString("cname") %></span>
-                            <h3 class="a">
-                                <a href="#"><%= rs42.getString("description") %></a>
-                            </h3>
+                            <h3 class="a"><a href="#"><%= rs42.getString("description") %></a></h3>
                         </div>
 
                         <div class="pricing">
@@ -64,7 +59,7 @@
                                 <span class="price">&#8377 <%= rs42.getString("price") %></span>
 
                                 <button class="btn-cta" style="float:right">
-                                    <a href="<%= ctx %>/frontend/courses-single.jsp?id=<%= rs42.getString("id") %>">
+                                    <a href="<%= request.getContextPath() %>/frontend/courses-single.jsp?id=<%= rs42.getString("id") %>">
                                         <span>Read More</span>
                                     </a>
                                 </button>
