@@ -1,5 +1,5 @@
-<%@page import="db.connect_db"%>
 <%@page import="java.sql.*"%>
+<%@page import="db.connect_db"%>
 
 <%
     String ctx = request.getContextPath();
@@ -25,6 +25,7 @@
             margin: 8px 0;
             border: 1px solid #ccc;
             width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -36,12 +37,15 @@
 <div id="page">
 
     <!-- HEADER -->
-    <jsp:include page="/frontend/include/header.jsp"/>
+    <jsp:include page="/frontend/include/header.jsp" />
 
     <div class="about">
-        <div class="container" style="margin-top:160px;width:40%;">
-            <h2 class="text-center">Sign In</h2>
+        <div class="container" style="margin-top:160px; width:40%;">
 
+            <h2 class="text-center">Sign In</h2>
+            <br>
+
+            <!-- FIX: Correct form action path -->
             <form action="<%= ctx %>/userlogin" method="post">
 
                 <label>Email</label>
@@ -50,23 +54,28 @@
                 <label>Password</label>
                 <input type="password" name="password" required>
 
-                <br>
-                <input type="submit" value="Sign In" class="btn btn-primary" style="width:100%">
+                <br><br>
+
+                <input type="submit" value="Sign In" class="btn btn-primary" style="width:100%;">
 
             </form>
 
-            <p>
+            <br>
+
+            <p class="text-center">
                 Don’t have an account?
                 <a href="<%= ctx %>/frontend/signup.jsp">Sign Up</a>
             </p>
+
         </div>
     </div>
 
     <!-- FOOTER -->
-    <jsp:include page="/frontend/include/footer.jsp"/>
+    <jsp:include page="/frontend/include/footer.jsp" />
 
 </div>
 
+<!-- JS -->
 <script src="<%= ctx %>/js/jquery.min.js"></script>
 <script src="<%= ctx %>/js/bootstrap.min.js"></script>
 
