@@ -5,6 +5,9 @@
 <%
     String email = (String) session.getAttribute("email");
     String name  = (String) session.getAttribute("user");
+
+    // REQUIRED for all pages
+    String ctx = request.getContextPath();
 %>
 
 <nav class="colorlib-nav" role="navigation" style="background:black;height:133px;">
@@ -16,7 +19,8 @@
                 <div class="col-md-3">
                     <h3 style="color:white; margin:0;">
                         <i class="fa fa-book" style="color:blue;"></i>
-                        <a href="<c:url value='/frontend/index.jsp'/>" style="color:white; text-decoration:none;">
+                        <a href="<c:url value='/frontend/index.jsp'/>"
+                           style="color:white; text-decoration:none;">
                             Shiva Teaching
                         </a>
                     </h3>
@@ -56,12 +60,9 @@
                         <li><a href="<c:url value='/frontend/contact.jsp'/>">Contact</a></li>
 
                         <% if(email == null) { %>
-
                             <li><a href="<c:url value='/frontend/signin.jsp'/>">Sign In</a></li>
                             <li><a href="<c:url value='/frontend/signup.jsp'/>">Sign Up</a></li>
-
                         <% } else { %>
-
                             <li class="has-dropdown">
                                 <a href="#"><span class="fa fa-user"></span> <b><%= name %></b></a>
                                 <ul class="dropdown">
@@ -69,7 +70,6 @@
                                     <li><a href="<c:url value='/frontend/logout.jsp'/>">LOGOUT</a></li>
                                 </ul>
                             </li>
-
                         <% } %>
 
                     </ul>
