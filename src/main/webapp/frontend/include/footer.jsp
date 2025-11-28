@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
+    String ctx = request.getContextPath();   // ADD THIS
+
     Connection con2 = new connect_db().getConnection();
 
     // CONTACT INFO
