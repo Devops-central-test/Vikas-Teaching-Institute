@@ -6,7 +6,19 @@
     String ctx = request.getContextPath();
     String email = (String) session.getAttribute("email");
     String name  = (String) session.getAttribute("user");
+
+    Connection conMenu = null;
+    PreparedStatement psMenu = null;
+    ResultSet rsMenu = null;
+
+    try {
+        conMenu = new connect_db().getConnection();
+        psMenu = conMenu.prepareStatement("SELECT * FROM add_category ORDER BY id DESC");
+        rsMenu = psMenu.executeQuery();
 %>
+
+<!-- FontAwesome (Required for icons) -->
+<link rel="stylesheet" href="<%= ctx %>/css/font-awesome.min.css">
 
 <nav class="colorlib-nav" role="navigation" style="background:black;height:133px;">
     <div class="top-menu" style="padding:49px">
@@ -30,21 +42,15 @@
                         <li><a href="<%= ctx %>/frontend/index.jsp">Home</a></li>
 
                         <!-- CATEGORY DROPDOWN -->
-                        <%
-                            Connection conMenu = new connect_db().getConnection();
-                            PreparedStatement psMenu = conMenu.prepareStatement("SELECT * FROM add_category");
-                            ResultSet rsMenu = psMenu.executeQuery();
-                        %>
-
                         <li class="has-dropdown">
                             <a href="<%= ctx %>/frontend/courses.jsp">Courses</a>
                             <ul class="dropdown">
                                 <% while(rsMenu.next()) { %>
-                                <li>
-                                    <a href="<%= ctx %>/frontend/course_category.jsp?id=<%= rsMenu.getString("id") %>">
-                                        <%= rsMenu.getString("category") %>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="<%= ctx %>/frontend/course_category.jsp?id=<%= rsMenu.getString("id") %>">
+                                            <%= rsMenu.getString("category") %>
+                                        </a>
+                                    </li>
                                 <% } %>
                             </ul>
                         </li>
@@ -56,7 +62,7 @@
                         <li><a href="<%= ctx %>/frontend/blog.jsp">Blog</a></li>
                         <li><a href="<%= ctx %>/frontend/contact.jsp">Contact</a></li>
 
-                        <% if(email == null) { %>
+                        <% if (email == null) { %>
 
                             <li><a href="<%= ctx %>/frontend/signin.jsp">Sign In</a></li>
                             <li><a href="<%= ctx %>/frontend/signup.jsp">Sign Up</a></li>
@@ -64,7 +70,10 @@
                         <% } else { %>
 
                             <li class="has-dropdown">
-                                <a href="#"><span class="fa fa-user"></span> <b><%= name %></b></a>
+                                <a href="#">
+                                    <span class="fa fa-user"></span>
+                                    <b><%= name %></b>
+                                </a>
                                 <ul class="dropdown">
                                     <li><a href="<%= ctx %>/frontend/profile_user.jsp">PROFILE</a></li>
                                     <li><a href="<%= ctx %>/frontend/logout.jsp">LOGOUT</a></li>
@@ -80,3 +89,11 @@
         </div>
     </div>
 </nav>
+
+<%
+    } finally {
+        if (rsMenu != null) rsMenu.close();
+        if (psMenu != null) psMenu.close();
+        if (conMenu != null) conMenu.close();
+    }
+%>
