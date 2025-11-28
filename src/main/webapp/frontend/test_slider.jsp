@@ -1,11 +1,15 @@
 <%@page import="java.sql.*"%>
 <%@page import="db.connect_db"%>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/sss/sss.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/sss/estilos.css">
+<!-- Slider CSS -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/sss.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/estilos.css">
 
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/sss/sss.js"></script>
+
+<!-- Slider JS -->
+<script src="<%= request.getContextPath() %>/js/sss.js"></script>
 
 <script>
     jQuery(function($){
@@ -34,9 +38,11 @@
 
         <div class="testimonial-item">
             <div class="testimonial-client">
+                <!-- FIX: Correct image folder -->
                 <img src="<%= request.getContextPath() %>/admin/images/<%= rst.getString("image") %>" alt="">
                 <p class="client-name"><%= rst.getString("title") %></p>
             </div>
+
             <div class="testimonial-text">
                 <p><%= rst.getString("content") %></p>
             </div>
