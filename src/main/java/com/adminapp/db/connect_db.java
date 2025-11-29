@@ -21,7 +21,7 @@ public class connect_db {
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://98.84.171.82:3306/admin?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+            String url = "jdbc:mysql://3.89.59.236:3306/admin?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
             String user = "adminapp_user";
             String pass = "StrongP@ssw0rd";
 
@@ -34,6 +34,7 @@ public class connect_db {
         return con;
     }
 }
+
 
 
 
